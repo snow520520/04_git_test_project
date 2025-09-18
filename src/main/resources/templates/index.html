@@ -5,24 +5,43 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>GIT TEST</h1>
+	<h1>학원 정보 조회하기</h1>
 	<hr>
-	<h3>index 파일 수정..</h3>
-	<h1>설항 동희 바보</h1>
-	<h1>설항 동희 바보</h1>
+	<input type="text" id="khName">
+	<button id="btn">조회하기</button>
+	<div id="result"></div>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		$("#btn").on("click",function(){
+		$("#result").empty();
+		const khName = $("#khName").val();
+		$.ajax({
+		url : "/kh/searchKh",
+		data : {khName : khName},
+		type : "get",
+		success : function(data){
+		if(data){
+			const ul = $("<ul>");
+			const nameLi = $("<li>");
+			nameLi.text(data.khName);
+			const addrLi = $("<li>");
+			addrLi.text(data.khAddr);
+			const faxLi = $("<li>");
+			faxLi.text(data.khFax);
+			ul.append(nameLi).append(addrLi).append(faxLi);
+			$("#result").append(ul);
+		}else{
+			const ul = $("<ul>");
+			const noSearchLi = $("<li>");
+			noSearchLi.text("정보가 없습니다.");
+			ul.append(noSearchLi);
+			$("#result").append(ul);
+		}
+	}
+});
+});
 
-	<h2>4분 남았어요</h2>
-
-	<h1>영민님 똥멍청이</h1>
-	<h1>영민님 똥멍청이</h1>
-	<h1>영민님 똥멍청이</h1>
-	<h1>영민님 똥멍청이</h1>
-	<h1>영민님 똥멍청이</h1>
-	<h1>영민님 똥멍청이</h1>
-
-	
-	<h2>느림보들~~~~~~</h2>
-	<h2>빨리 올려보시라구요~~~~~</h2>
+</script>
 
 </body>
 </html>
